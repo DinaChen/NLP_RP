@@ -1,8 +1,5 @@
 import re
 import csv
-#remove irrelevant information, only dialogue self will be left over
-# use Pickle?
-# first all sentence
 
 
 angleBrac = '<(.|\n)*?>'        # remove <>
@@ -14,37 +11,19 @@ noice = '(&.*;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(Opening
 
 def main():
 
-    ep1 = 'transcripts/0101.html'
-    ep2 = 'transcripts/0102.html'
-    ep3 = 'transcripts/0103.html'
-    ep4 = 'transcripts/0104.html'
-    ep5 = 'transcripts/0105.html'
-    ep6 = 'transcripts/0106.html'
-    ep7 = 'transcripts/0107.html'
-    ep8 = 'transcripts/0108.html'
-    ep9 = 'transcripts/0109.html'
-    ep10 = 'transcripts/0110.html'
-    ep11 = 'transcripts/0111.html'
-    ep12 = 'transcripts/0112.html'
-    ep13 = 'transcripts/0113.html'
-    ep14 = 'transcripts/0114.html'
-    ep15 = 'transcripts/0115.html'
-    ep16 = 'transcripts/0116.html'
-    ep17 = 'transcripts/0117.html'
-    ep18 = 'transcripts/0118.html'
-    ep19 = 'transcripts/0119.html'
-    ep20 = 'transcripts/0120.html'
-    ep21 = 'transcripts/0121.html'
-    ep22 = 'transcripts/0122.html'
-    ep23 = 'transcripts/0123.html'
-    ep24 = 'transcripts/0124.html'
+# Generates html paths for all episodes in Season 1
+    friendS1_paths = []
+    for i in range(1, 10):
+        path ='transcripts/010'+ str(i) + ".html"
+        friendS1_paths.append(path)
+    for i in range(10, 25):
+        path ='transcripts/01'+ str(i) + ".html"
+        friendS1_paths.append(path)
 
-    #bb = open('transcripts/tbbt0101.html', encoding="utf8").read()
-
-    friendS1_paths = [ep1, ep2, ep3, ep4, ep5, ep6, ep7, ep8, ep9, ep10, ep11, ep12, ep13, ep14, ep15, ep16, ep17, ep18, ep19, ep20, ep21, ep22, ep23, ep24]
     friendS1 = seasonTranscript(friendS1_paths)
     printLines(friendS1)
     print(len(friendS1))
+#bb = open('transcripts/tbbt0101.html', encoding="utf8").read()
 
 
 # Given transcript of 1 season in html format, out put list of lines with all irrelevant info removed, all episodes concatenate together.
