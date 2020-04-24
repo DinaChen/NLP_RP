@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="d6272f1d-5786-4c9b-abbe-7ac94c87894a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/transcripts/0103.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0104.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0105.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0106.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0107.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0108.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0109.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0110.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0111.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0112.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0113.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0114.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0115.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0116.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0117.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0118.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0119.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0120.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0121.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0122.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0123.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/transcripts/0124.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dataProcess.py" beforeDir="false" afterPath="$PROJECT_DIR$/dataProcess.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transcripts/friends0101.html" beforeDir="false" afterPath="$PROJECT_DIR$/transcripts/0101.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transcripts/friends0102.html" beforeDir="false" afterPath="$PROJECT_DIR$/transcripts/0102.html" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1awJ2Nqb8hRO1qkG7LVLzbOpVky" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/transcripts" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Dina\PycharmProjects\NLP_RP\transcripts" />
+      <recent name="C:\Users\Dina\PycharmProjects\NLP_RP" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Dina\PycharmProjects\NLP_RP\transcripts" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="dataProcess" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="NLP_RP" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\Dina\anaconda3\pythonw.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/dataProcess.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.dataProcess" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d6272f1d-5786-4c9b-abbe-7ac94c87894a" name="Default Changelist" comment="" />
+      <created>1587640514820</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1587640514820</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587640824825">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="223" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1587640824825" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1587643938671">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1587643938671" />
+    <state x="484" y="7" key="#dataProcess" timestamp="1587640815436">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="484" y="7" key="#dataProcess/0.0.1536.824@0.0.1536.824" timestamp="1587640815436" />
+    <state width="1515" height="216" key="GridCell.Tab.0.bottom" timestamp="1587737354738">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="216" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587737354738" />
+    <state width="1515" height="216" key="GridCell.Tab.0.center" timestamp="1587737354738">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="216" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1587737354738" />
+    <state width="1515" height="216" key="GridCell.Tab.0.left" timestamp="1587737354738">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="216" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1587737354738" />
+    <state width="1515" height="216" key="GridCell.Tab.0.right" timestamp="1587737354738">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="216" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1587737354738" />
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom" timestamp="1587735798522">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1587735798522" />
+    <state width="1515" height="261" key="GridCell.Tab.1.center" timestamp="1587735798522">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1587735798522" />
+    <state width="1515" height="261" key="GridCell.Tab.1.left" timestamp="1587735798522">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1587735798522" />
+    <state width="1515" height="261" key="GridCell.Tab.1.right" timestamp="1587735798522">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1515" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1587735798522" />
+  </component>
+</project>
