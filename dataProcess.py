@@ -1,26 +1,15 @@
 import re
 import csv
 #remove irrelevant information, only dialogue self will be left over
-##### To remove:
-# Title lines, writtenby, transcripbed by.... End
-
-# Charactor:
-
-# punctuation? not yet
-
-# input: 1 html file :
-# later: a list of html file for whole serie
-# output: list of sentence?
 # use Pickle?
 # first all sentence
 
-# problem: cant open the big bang theory file
-# question: do i have to download the script one by one?
 
-angleBrac = '<(.|\n)*?>'  # remove <>
-roundBrac = '\(([^)]+)\)'  # remove()
-squareBrac = '\[(.|\n)*?\]'  # '\[.*?\]'  #remove[]  doesn't completely work yet
-noice = '(&nbsp;)|(&quot;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(Opening Credits)|(&#146;)|(&#151;)'
+angleBrac = '<(.|\n)*?>'        # remove <>
+roundBrac = '\(([^)]+)\)'       # remove()
+squareBrac = '\[(.|\n)*?\]'     #remove[]
+noice = '(&.*;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(Opening Credits)'
+#noice = '(&nbsp;)|(&quot;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(Opening Credits)|(&#146;)|(&#151;)'
 # &#151; appears in 0118, &#146; appears in 16
 
 def main():
@@ -52,13 +41,22 @@ def main():
 
     #bb = open('transcripts/tbbt0101.html', encoding="utf8").read()
 
-    s1 = episodeTranscript(ep3)
+    friendS1_paths = [ep1, ep2, ep3, ep4, ep5, ep6, ep7, ep8, ep9, ep10, ep11, ep12, ep13, ep14, ep15, ep16, ep17, ep18, ep19, ep20, ep21, ep22, ep23, ep24]
+    friendS1 = seasonTranscript(friendS1_paths)
+    printLines(friendS1)
+    print(len(friendS1))
 
-    printLines(s1)
-    print(len(s1))
+
+# Given transcript of 1 season in html format, out put list of lines with all irrelevant info removed, all episodes concatenate together.
+# List(html_path) -> List(string)
+def seasonTranscript(listOfpath):
+    toreturn = []
+    for epi in listOfpath:
+        toreturn = toreturn + episodeTranscript(epi)
+    return toreturn
 
 
-# then group everything together as 1 string
+
 # Given transcript of 1 episode in html format, out put list of lines with all irrelevant info removed.
 # .html_path -> List(string)
 def episodeTranscript(html_path):
@@ -66,6 +64,7 @@ def episodeTranscript(html_path):
     cleaned_transcript = cleaned(epi)
     splitted_transcript = split(cleaned_transcript)
     return splitted_transcript
+
 
 # remove brackets and weird sign (&nbsp;, &quot;)
 # remove things at once
