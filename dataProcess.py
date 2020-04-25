@@ -5,14 +5,16 @@ import os
 angleBrac = '<(.|\n)*?>'        # remove <>
 roundBrac = '\(([^)]+)\)'       # remove()
 squareBrac = '\[(.|\n)*?\]'     #remove[]
-noice = '(&.*;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|(OPENING TITLES)|(.push;)'
+noice = '(&.*;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|(OPENING TITLES)|(.push;)|(THE END)'
 #noice = '(&nbsp;)|(&quot;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(Opening Credits)|(&#146;)|(&#151;)'
 # &#151; appears in 0118, &#146; appears in 16, .push; in tbbt
 
 def main():
-  # get 61050 lines in a string
-  #friends()
-    bigbang()
+
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/How I Met Your Mother/season1/0106.html'
+
+    t = epiTranscript('How I Met Your Mother/season1/0106.html')
+    printLines(t)
 
 
 def bigbang():
@@ -56,16 +58,19 @@ def seasonTranscript(listOfpath, serie):
     return toreturn
 
 
-# for the big bang theory
+# for the big bang theory, how I met your mother
 def epiTranscript(html_path):
     epi = open(html_path, encoding="utf8").read()
-    scene_removed = re.sub('<p>Scene:.*', "", epi)
+    scene_removed = re.sub('(<p>Scene|<p><strong>).*', "", epi)  #second one for himym
+    #scene_removed1 = re.sub('<p>.*:', '<p>', scene_removed)
     lines = re.findall('<p>.*', scene_removed)
     toreturn = []
     for line in lines:
         cleanedline = re.sub('.*:', "", cleaned(line))
-        toreturn.append(cleanedline)
+        if cleanedline:                                         #no empty line added
+            toreturn.append(cleanedline)
     return toreturn
+
 
 # Given transcript of 1 episode in html format, out put list of lines with all irrelevant info removed.
 # .html_path -> List(string)
@@ -105,7 +110,7 @@ def split(epi):
         j = re.sub('\n', " ", line)
 
         if splitted.index(line) == len(splitted)-1:
-            k = re.sub('(End)|(END)', '', j)
+            k = re.sub('(End)|(END)|(THE END)', '', j)
             toreturn.append(k)
         else:
             toreturn.append(j)
