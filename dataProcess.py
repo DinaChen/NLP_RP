@@ -5,11 +5,31 @@ import os
 angleBrac = '<(.|\n)*?>'        # remove <>
 roundBrac = '\(([^)]+)\)'       # remove()
 squareBrac = '\[(.|\n)*?\]'     #remove[]
-noice = '(&.*;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|(OPENING TITLES)'
+noice = '(&.*;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|(OPENING TITLES)|(.push;)'
 #noice = '(&nbsp;)|(&quot;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(Opening Credits)|(&#146;)|(&#151;)'
-# &#151; appears in 0118, &#146; appears in 16
+# &#151; appears in 0118, &#146; appears in 16, .push; in tbbt
 
 def main():
+  # get 61050 lines in a string
+  #friends()
+    bigbang()
+
+
+def bigbang():
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/season4'
+    filePaths = []
+    for r, d, f in os.walk(path):
+        for file in f:
+            if '.html' in file:
+                filePaths.append(os.path.join(r, file))
+
+    tbbt = seasonTranscript(filePaths, 'tbbt')
+    printLines(tbbt)
+    print('#lines: ' + str(len(tbbt)))
+    print('#episodes: ' + str(len(filePaths)))
+    print('avg.lines per episode: ' + str(len(tbbt) / len(filePaths)))
+
+def  friends():
     path = 'C:/Users/Dina/PycharmProjects/NLP_RP/transcripts/'
     filePaths = []
     for r, d, f in os.walk(path):
@@ -17,26 +37,35 @@ def main():
             if '.html' in file:
                 filePaths.append(os.path.join(r, file))
 
-
-    friends = seasonTranscript(filePaths)
+    friends = seasonTranscript(filePaths, 'friends')
     printLines(friends)
     print('#lines: ' + str(len(friends)))
     print('#episodes: ' + str(len(filePaths)))
-    print('avg.lines per episode: ' + str(len(friends)/len(filePaths)))
-
-#bb = open('transcripts/tbbt0101.html', encoding="utf8").read()
-
-
+    print('avg.lines per episode: ' + str(len(friends) / len(filePaths)))
 
 # Given transcript of 1 season in html format, out put list of lines with all irrelevant info removed, all episodes concatenate together.
 # List(html_path) -> List(string)
-def seasonTranscript(listOfpath):
+def seasonTranscript(listOfpath, serie):
     toreturn = []
     for epi in listOfpath:
-        toreturn = toreturn + episodeTranscript(epi)
+        if(serie == 'friends'):
+            toreturn = toreturn + episodeTranscript(epi)
+        elif(serie == 'tbbt'):
+            toreturn = toreturn + epiTranscript((epi))
+
     return toreturn
 
 
+# for the big bang theory
+def epiTranscript(html_path):
+    epi = open(html_path, encoding="utf8").read()
+    scene_removed = re.sub('<p>Scene:.*', "", epi)
+    lines = re.findall('<p>.*', scene_removed)
+    toreturn = []
+    for line in lines:
+        cleanedline = re.sub('.*:', "", cleaned(line))
+        toreturn.append(cleanedline)
+    return toreturn
 
 # Given transcript of 1 episode in html format, out put list of lines with all irrelevant info removed.
 # .html_path -> List(string)
