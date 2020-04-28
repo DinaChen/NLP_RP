@@ -1,4 +1,6 @@
 import dataProcess
+import spacy
+sp = spacy.load('en_core_web_sm')
 import nltk
 nltk.download('punkt')
 nltk.download('stopwords')
@@ -27,6 +29,7 @@ def main():
     #dataProcess.printLines(friends0101)
     #print(len(friends0101))
 
+
     bags = []
     for sentence in friends0101:
         wordBag = nltk.word_tokenize(sentence)
@@ -38,7 +41,7 @@ def main():
                 bigram.add_vocab([wordBag_puncFree])
         bags.append(wordBag_puncFree)
 
-    dataProcess.printLines(bags)
+    dataProcess.printLines(bags)  ##
     print(len(friends0101))
     print(len(bags))
 
@@ -59,5 +62,21 @@ def stem():
     print(lancaster.stem("you are"))
     print(lancaster.stem("'re"))
 
+def spacy():
+    sentence = sp(u'Manchester United is looking to sign a forward for $90 million')
+    print(sentence)
+    porter = PorterStemmer()
+
+    for word in sentence:
+        print(word)
+        print(word.pos_)
+
+        if (word.pos_ == 'VERB'):
+            print('hi')
+            st = porter.stem(word)  # only used by string
+            print(st)
+
+
 main()
 #tokenize()
+#spacy()

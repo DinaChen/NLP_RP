@@ -15,7 +15,7 @@ noice = '(&.*;)|(Commercial Break)|(Commercial break)|' \
 def main():
 
     path = 'C:/Users/Dina/PycharmProjects/NLP_RP/How I Met Your Mother/season1/0106.html'
-    friends()
+
 
 
 
