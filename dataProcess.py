@@ -5,20 +5,22 @@ import os
 angleBrac = '<(.|\n)*?>'        # remove <>
 roundBrac = '\(([^)]+)\)'       # remove()
 squareBrac = '\[(.|\n)*?\]'     #remove[]
-noice = '(&.*;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|(OPENING TITLES)|(.push;)|(THE END)'
-#noice = '(&nbsp;)|(&quot;)|(Commercial Break)|(Commercial break)|(Closing Credits)|(Opening Credits)|(&#146;)|(&#151;)'
+# remove number?
+noice = '(&.*;)|(Commercial Break)|(Commercial break)|' \
+        '(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|' \
+        '(OPENING TITLES)|(.push;)|(THE END)|[0-9]' #[0-9]
+
 # &#151; appears in 0118, &#146; appears in 16, .push; in tbbt
 
 def main():
 
     path = 'C:/Users/Dina/PycharmProjects/NLP_RP/How I Met Your Mother/season1/0106.html'
+    friends()
 
-    t = epiTranscript('How I Met Your Mother/season1/0106.html')
-    printLines(t)
 
 
 def bigbang():
-    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/season4'
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/season1'
     filePaths = []
     for r, d, f in os.walk(path):
         for file in f:
@@ -31,8 +33,8 @@ def bigbang():
     print('#episodes: ' + str(len(filePaths)))
     print('avg.lines per episode: ' + str(len(tbbt) / len(filePaths)))
 
-def  friends():
-    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/transcripts/'
+def friends():
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/transcripts/season2'
     filePaths = []
     for r, d, f in os.walk(path):
         for file in f:
@@ -68,15 +70,16 @@ def epiTranscript(html_path):
     for line in lines:
         cleanedline = re.sub('.*:', "", cleaned(line))
         if cleanedline:                                         #no empty line added
-            toreturn.append(cleanedline)
+            toreturn.append(cleanedline.lower())                # to lowercase
     return toreturn
 
 
+# episodeTranscript is for Friends only
 # Given transcript of 1 episode in html format, out put list of lines with all irrelevant info removed.
 # .html_path -> List(string)
 def episodeTranscript(html_path):
     epi = open(html_path, 'r').read()
-    cleaned_transcript = cleaned(epi)
+    cleaned_transcript = cleaned(epi).lower()
     splitted_transcript = split(cleaned_transcript)
     return splitted_transcript
 
@@ -116,6 +119,11 @@ def split(epi):
             toreturn.append(j)
 
     return toreturn
+
+#remove all the punctuation
+def removePunctuation(text):
+    return re.sub("[^\w\s]", "", text)
+
 
 
 # print list of string in readable way
