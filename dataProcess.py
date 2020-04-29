@@ -5,7 +5,7 @@ import os
 angleBrac = '<(.|\n)*?>'        # remove <>
 roundBrac = '\(([^)]+)\)'       # remove()
 squareBrac = '\[(.|\n)*?\]'     #remove[]
-# remove number?
+
 noice = '(&.*;)|(Commercial Break)|(Commercial break)|' \
         '(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|' \
         '(OPENING TITLES)|(.push;)|(THE END)|[0-9]' #[0-9]
@@ -15,12 +15,12 @@ noice = '(&.*;)|(Commercial Break)|(Commercial break)|' \
 def main():
 
     path = 'C:/Users/Dina/PycharmProjects/NLP_RP/How I Met Your Mother/season1/0106.html'
-
+   # bigbang()
 
 
 
 def bigbang():
-    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/season1'
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/season6'
     filePaths = []
     for r, d, f in os.walk(path):
         for file in f:
