@@ -13,8 +13,10 @@ def main():
 
  tf.disable_eager_execution()
 
- scriptPaths = []    # create a list of unparsed files                   for example:  ['The Big Bang Theory/season1/0105.html']
- csvPaths = []       # create a list of the csv file it should write to, for example:  ['embeddedTBBT/0105.csv']
+ scriptPaths = ['How I Met Your Mother/season1/0101.html', 'How I Met Your Mother/season1/0102.html','How I Met Your Mother/season1/0103.html',
+                'How I Met Your Mother/season1/0104.html','How I Met Your Mother/season1/0105.html']    # create a list of unparsed files                   for example:  ['The Big Bang Theory/season1/0105.html']
+ csvPaths = ['embeddedHIMYM/0101.csv','embeddedHIMYM/0102.csv','embeddedHIMYM/0103.csv','embeddedHIMYM/0104.csv'
+             ,'embeddedHIMYM/0105.csv']       # create a list of the csv file it should write to, for example:  ['embeddedTBBT/0105.csv']
 
  embeddingsForeach(scriptPaths, csvPaths)
 

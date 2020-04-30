@@ -1,0 +1,28 @@
+F: Friends
+H: How I Met Your Mother
+T: The Big Bang Theory
+Train/Test ratio: 8:2
+
+
+First experiment on logistic regression
+
+Data: 1 episode (0101)
+
+Lines count:
+
+  tra   tes  tot
+----------------
+F 243   61   304
+H 220   56   276
+T 260   67   327
+  723  184   327
+
+Result: 59.8%
+
+
+Next:
+structurize the LRmodel functions
+train on 5 episodes, see changes
+question: can we train it in multiple times?
+
+

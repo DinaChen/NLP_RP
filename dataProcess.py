@@ -14,10 +14,24 @@ noice = '(&.*;)|(Commercial Break)|(Commercial break)|' \
 
 def main():
 
-    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/How I Met Your Mother/season1/0106.html'
-   # bigbang()
+    #for 0101 0122 0212
+    # <p><em>In the street</em></p>  0122
+    # Todo, around 0305, problem with using int. ext. indicating location
 
+    #himym()
 
+def himym():
+    path = 'How I Met Your Mother/season3'
+    filePaths = []
+    for r, d, f in os.walk(path):
+        for file in f:
+            if '.html' in file:
+                filePaths.append(os.path.join(r, file))
+    himym = seasonTranscript(filePaths, 'other')
+    printLines(himym)
+    print('#lines: ' + str(len(himym)))
+    print('#episodes: ' + str(len(filePaths)))
+    print('avg.lines per episode: ' + str(len(himym) / len(filePaths)))
 
 def bigbang():
     path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/season6'
@@ -27,7 +41,7 @@ def bigbang():
             if '.html' in file:
                 filePaths.append(os.path.join(r, file))
 
-    tbbt = seasonTranscript(filePaths, 'tbbt')
+    tbbt = seasonTranscript(filePaths, 'other')
     printLines(tbbt)
     print('#lines: ' + str(len(tbbt)))
     print('#episodes: ' + str(len(filePaths)))
@@ -54,7 +68,7 @@ def seasonTranscript(listOfpath, serie):
     for epi in listOfpath:
         if(serie == 'friends'):
             toreturn = toreturn + episodeTranscript(epi)
-        elif(serie == 'tbbt'):
+        elif(serie == 'other'):
             toreturn = toreturn + epiTranscript((epi))
 
     return toreturn
@@ -63,7 +77,7 @@ def seasonTranscript(listOfpath, serie):
 # for the big bang theory, how I met your mother
 def epiTranscript(html_path):
     epi = open(html_path, encoding="utf8").read()
-    scene_removed = re.sub('(<p>Scene|<p><strong>).*', "", epi)  #second one for himym
+    scene_removed = re.sub('(<p>Scene|<p><em>).*', "", epi)  #second one for himym
     #scene_removed1 = re.sub('<p>.*:', '<p>', scene_removed)
     lines = re.findall('<p>.*', scene_removed)
     toreturn = []

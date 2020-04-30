@@ -15,3 +15,5 @@ S11
 S12
 
 it takes 30s to generate sentence embedding for 1 episode
+
+"So, I can have the moving truck here by 8:00 am" , will become:  am
