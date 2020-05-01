@@ -54,7 +54,7 @@ def elmo_vectors(x):
 def getAllpaths(scriptFile):
     #path = 'C:/Users/Dina/PycharmProjects/NLP_RP/transcripts/season2'
     filePaths = []
-    for r, d, f in os.walk(scriptFath):
+    for r, d, f in os.walk(scriptFile):
         for file in f:
             if '.html' in file:
                 filePaths.append(os.path.join(r, file))
