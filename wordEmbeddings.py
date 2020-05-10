@@ -8,6 +8,8 @@ import csv
 import string
 from gensim.models import Phrases
 from gensim.models import Word2Vec
+from gensim.models import KeyedVectors
+from gensim.test.utils import get_tmpfile
 
 from nltk.stem import LancasterStemmer
 from nltk.stem import PorterStemmer
@@ -20,34 +22,52 @@ from nltk.corpus import stopwords
 # lemmatization before tokenization?
 def main():
 
-    bigram = Phrases()
+    phr = Phrases()
     lancaster = LancasterStemmer()
     porter = PorterStemmer()
 
     file = 'transcripts/season1/0101.html'
-    friends0101 = dataProcess.episodeTranscript(file)
-    #dataProcess.printLines(friends0101)
-    #print(len(friends0101))
+    f0101 = dataProcess.episodeTranscript(file)
 
+    #dataProcess.printLines(f0101)
 
     bags = []
-    for sentence in friends0101:
+    for sentence in f0101:
         wordBag = nltk.word_tokenize(sentence)
         wordBag_puncFree = []
         for word in wordBag:
             if word not in string.punctuation and word not in stopwords.words("english"): # && not "..."
                 #wordBag_puncFree.append(porter.stem(word))   # stem?
                 wordBag_puncFree.append(word)
-                bigram.add_vocab([wordBag_puncFree])
+                phr.add_vocab([wordBag_puncFree])
         bags.append(wordBag_puncFree)
 
-    dataProcess.printLines(bags)  ##
-    print(len(friends0101))
+    dataProcess.printLines(list(phr[bags]))
+    print(len(f0101))
     print(len(bags))
 
-    bigram.add_vocab([bags])
-    bigram_model = Word2Vec(bigram[bags], size=100)
-    print(bigram_model.similarity("date", "new"))
+    #phr.add_vocab([bags])
+    friendsW2v = Word2Vec(phr[bags], min_count=1, size=32)
+
+    word_vectors = friendsW2v.wv
+    fname = get_tmpfile("vectors.kv")
+    word_vectors.save(fname)
+    word_vectors = KeyedVectors.load(fname, mmap='r')
+
+    vec = word_vectors.get_vector('work')
+    print(vec)
+
+    #odel = Word2Vec(common_texts, size=100, window=5, min_count=1, workers=4)   window?
+    #print(friendsW2v.similarity("look", "dream"))
+    #print(friendsW2v.wv['look'])
+    #print(friendsW2v.get_vector('just'))
+
+
+
+
+
+
+
 
 
 def tokenize():

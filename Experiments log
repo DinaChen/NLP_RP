@@ -4,6 +4,50 @@ T: The Big Bang Theory
 Train/Test ratio: 8:2
 
 
+Changed the way of processing data
+split on ".?!"
+remove all the record with less or equal to 2 words.
+
+--------------------------------------------------
+9 seasons (All)
+
+f: 63075 t: 68027 h: 51427
+Train Set: f :50460 t: 54421 h: 41141
+Tot: 146022
+Test Set: f: 12615 t: 13606 h: 10286
+Tot: 36507
+Success rate: 61.8456734324924
+
+---------------------------------------------------
+5 seasons(6 for friends)
+
+f: 39172 t: 37888 h: 23743
+Train Set: f :31337 t: 30310 h: 18994
+Tot: 80641
+Test Set: f: 7835 t: 7578 h: 4749
+Tot: 20162
+Success rate: 73.95099692490824
+
+with ratio 8.5
+f: 63075 t: 68027 h: 51427
+Train Set: f :53613 t: 57822 h: 43712
+Tot: 155147 labels: 155147 train: 155147
+Test Set: f: 9462 t: 10205 h: 7715
+Tot: 27382 labels: 27382 test: 27382
+Success rate: 62.303703162661606
+
+
+
+
+
+
+
+
+
+
+
+
+
 First experiment on logistic regression
 
 Data: 1 episode (0101)
@@ -19,10 +63,57 @@ T 260   67   327
 
 Result: 59.8%
 
-
+----------------------------------------------------------
 Next:
 structurize the LRmodel functions
 train on 5 episodes, see changes
 question: can we train it in multiple times?
+Done 1 May, 2020
 
+-----------------------------------------------------------
+Second: 5 episodes.
+f: 1084 t: 1270 h: 1271
 
+Train Set: f :867 t: 1016 h: 1016
+Tot: 2899
+Test Set: f: 217 t: 254 h: 255
+Tot: 726
+
+Success rate: 73.4159779614325
+------------------------------------------------------------
+Third: 10 episodes
+f: 2271 t: 2765 h: 2533
+
+Train Set: f :1816 t: 2212 h: 2026
+Tot: 6054 labels: 6054 train: 6054
+Test Set: f: 455 t: 553 h: 507
+Tot: 1515 labels: 1515 test: 1515
+
+Success rate: 82.64026402640265
+
+Next:
+Add 1 seasons
+add 2 series
+run on 1 seasons, see if the rate drop a lot
+
+------------------------------------------------------------
+Fourth: 1 season (without f:0123 h:0116, 0121 t:0117)
+
+f: 5394 t: 5233 h: 3994
+Train Set: f :4315 t: 4186 h: 3195
+Tot: 11696 labels: 11696 train: 11696
+Test Set: f: 1079 t: 1047 h: 799
+Tot: 2925 labels: 2925 test: 2925
+Success rate: 51.00854700854701
+
+(forget to record, 2 seasons: success rate around 60)
+
+------------------------------------------------------------
+3 SEASONS (not in data: F: 7,16,22  T:3,18  H:02,09,13,14,15)
+
+f: 15893 t: 12901 h: 13106
+Train Set: f :12714 t: 10320 h: 10484
+Tot: 33518 labels: 33518 train: 33518
+Test Set: f: 3179 t: 2581 h: 2622
+Tot: 8382 labels: 8382 test: 8382
+Success rate: 56.979241231209734

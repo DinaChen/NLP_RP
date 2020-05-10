@@ -2,25 +2,32 @@ import re
 import csv
 import os
 
-angleBrac = '<(.|\n)*?>'        # remove <>
-roundBrac = '\(([^)]+)\)'       # remove()
-squareBrac = '\[(.|\n)*?\]'     #remove[]
-
 noice = '(&.*;)|(Commercial Break)|(Commercial break)|' \
         '(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|' \
-        '(OPENING TITLES)|(.push;)|(THE END)|[0-9]' #[0-9]
-
-# &#151; appears in 0118, &#146; appears in 16, .push; in tbbt
+        '(OPENING TITLES)|(.push;)|(THE END)|[0-9](\.|:)*|\.\.(\.)*'
 
 def main():
+# <p><em>In the street</em></p>  0122
+# Todoaround 0305, problem with using int. ext. indicating location
 
-    #for 0101 0122 0212
-    # <p><em>In the street</em></p>  0122
-    # Todo, around 0305, problem with using int. ext. indicating location
 
-    #himym()
 
-def himym():
+ #text = ' did you guys see the paper in the american physics journal on supersolids? it’s pretty interesting. In a world where rhinoceroses are domesticated pets, who wins the Second World War?'
+ #print = re.split('\. |\? ',text)
+ #printLines(print)
+ #tbbt = epiTranscript_cut('The Big Bang Theory/season2/0219.html')
+ #printLines(tbbt)
+ #print(len(tbbt))
+
+# fr = episodeTranscript('transcripts/season1/0102.html')
+# printLines(fr)
+
+ #h = epiTranscript_cut('How I Met Your Mother/season3/0315.html')
+ #printLines(h)
+
+
+
+ def himym():
     path = 'How I Met Your Mother/season3'
     filePaths = []
     for r, d, f in os.walk(path):
@@ -87,6 +94,25 @@ def epiTranscript(html_path):
             toreturn.append(cleanedline.lower())                # to lowercase
     return toreturn
 
+def epiTranscript_cut(html_path):
+    epi = open(html_path, encoding="utf8").read()
+    scene_removed = re.sub('(<p>Scene|<p><em>).*', "", epi)  # second one for himym
+
+    lines = re.findall('<p>.*', scene_removed)
+    toreturn = []
+    for line in lines:
+        cleanedline = re.sub('.*:', "", cleaned(line)).lower()
+        if cleanedline:  # no empty line added
+            sentences = re.split('\. |\? |\!',cleanedline)
+            sentences_fil = []
+            for s in sentences:
+                if len(s.split()) > 2:
+                    sentences_fil.append(s)
+            #sentences = cleanedline.split(cut)
+            toreturn.extend(sentences_fil)
+            # to lowercase
+    return toreturn
+
 
 # episodeTranscript is for Friends only
 # Given transcript of 1 episode in html format, out put list of lines with all irrelevant info removed.
@@ -102,11 +128,16 @@ def episodeTranscript(html_path):
 # remove things at once
 # string -> string
 def cleaned(epi):
-    t1 = re.sub(angleBrac, "", epi)
-    t2 = re.sub(roundBrac, "", t1)
-    t3 = re.sub(squareBrac, "", t2)
-    t4 = re.sub(noice, "", t3)
-    return t4
+    angleBrac = '<(.|\n)*?>'  # remove <>
+    roundBrac = '\(([^)]+)\)'  # remove()
+    squareBrac = '\[(.|\n)*?\]'  # remove[]
+    brac = '(<(.|\n)*?>)|(\(([^)]+)\))|(\[(.|\n)*?\])'
+    t1 = re.sub(brac, "", epi)
+    t2 = re.sub(noice, "", t1)
+    #t2 = re.sub(roundBrac, "", t1)
+    #t3 = re.sub(squareBrac, "", t2)
+    #t4 = re.sub(noice, "", t3)
+    return t2
 
 
 # use "Character:" as delimeter to cut transcript of one episode into seperated lines
@@ -123,14 +154,20 @@ def split(epi):
 
     toreturn = []
     for line in splitted:
-
         j = re.sub('\n', " ", line)
+        sentences = re.split('\. |\?', j)
+        sentences_fil = []
 
-        if splitted.index(line) == len(splitted)-1:
-            k = re.sub('(End)|(END)|(THE END)', '', j)
-            toreturn.append(k)
-        else:
-            toreturn.append(j)
+        for s in sentences:
+            if len(s.split()) > 2:
+                sentences_fil.append(s)
+        toreturn.extend(sentences_fil)
+
+       # if splitted.index(line) == len(splitted)-1:
+        #    k = re.sub('(End)|(END)|(THE END)', '', j)
+        #    toreturn.append(k)
+        #else:
+         #   toreturn.append(j)
 
     return toreturn
 

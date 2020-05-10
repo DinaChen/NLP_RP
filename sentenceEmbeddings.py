@@ -9,25 +9,61 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import dataProcess
 
+
+# create a list of unparsed files                   for example:  ['The Big Bang Theory/season1/0105.html']
+# create a list of the csv file it should write to, for example:  ['embeddedTBBT/0105.csv']
+
 def main():
 
  tf.disable_eager_execution()
 
- scriptPaths = ['How I Met Your Mother/season1/0101.html', 'How I Met Your Mother/season1/0102.html','How I Met Your Mother/season1/0103.html',
-                'How I Met Your Mother/season1/0104.html','How I Met Your Mother/season1/0105.html']    # create a list of unparsed files                   for example:  ['The Big Bang Theory/season1/0105.html']
- csvPaths = ['embeddedHIMYM/0101.csv','embeddedHIMYM/0102.csv','embeddedHIMYM/0103.csv','embeddedHIMYM/0104.csv'
-             ,'embeddedHIMYM/0105.csv']       # create a list of the csv file it should write to, for example:  ['embeddedTBBT/0105.csv']
-
- embeddingsForeach(scriptPaths, csvPaths)
 
 
+ s8csv = makePaths('embeddedHIMYM/s8/', 0, 1)
+ s8 = ['How I Met Your Mother/season8/0801.html']
+ embeddingsForeach(s8, s8csv)
+
+
+
+
+
+def friendsLeft():
+    f8 = ['transcripts/season8/0823.html']
+    f8csv = makePaths('embeddedFriends/s8/', 22, 23)
+
+    f9 = ['transcripts/season9/0923-0924.html']
+    f9csv = makePaths('embeddedFriends/s9/', 22, 23)
+
+    f10 = ['transcripts/season10/1017-1018.html']
+    f10csv = makePaths('embeddedFriends/s10/', 16, 17)
+
+
+
+    s9 = ['How I Met Your Mother/season9/0901.html','How I Met Your Mother/season9/0902.html','How I Met Your Mother/season9/0923.html',
+          'How I Met Your Mother/season9/0924.html']
+
+
+    s9csv =[]
+
+    embeddingsForeach(f10, f10csv)
+    embeddingsForeach(f8, f8csv)
+    embeddingsForeach(f9, f9csv)
+
+
+def makePaths(head, rangeFrom, rangeTo):
+    paths = []
+    for i in range(rangeFrom, rangeTo):
+
+        p = head + str(i+1) + '.csv'
+        paths.append(p)
+    return paths
 
 # scriptPaths: a list of paths of unparsed script
 # csvPaths: a list of path to write the results to,
 def embeddingsForeach(scriptPaths, csvPaths):
     tf.disable_eager_execution()
     for (i,j) in zip(scriptPaths, csvPaths):
-       parsed = dataProcess.epiTranscript(i)            # friends : episodeTranscript
+       parsed = dataProcess.epiTranscript_cut(i)            # friends : episodeTranscript
        elmoVec_toCSV(parsed,j)
 
 

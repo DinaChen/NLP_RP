@@ -7,14 +7,14 @@ import os.path as op
 import math
 
 #test train ratio: 8:2
-ratio = 0.8
+ratio = 0.9
 
+def main():
+    fpaths = getAllpaths('embeddedFriends')
+    tpaths = getAllpaths('embeddedHIMYM')
+    hpaths = getAllpaths('embeddedTBBT')
 
-fpaths = ['embeddedFriends/friends0101']
-tpaths = ['embeddedTBBT/0101.csv']
-hpaths = ['embeddedHIMYM/0101.csv']
-
-train_and_test(fpaths, tpaths, hpaths)
+    train_and_test(fpaths, tpaths, hpaths)
 
 
 
@@ -44,6 +44,7 @@ def train_and_test(fPaths, tPaths, hPaths):
     labelsTest = makeLabels(fTest_count, tTest_count, hTest_count)
 
     # Print data information
+    print('f: ' + str(fSet.shape[0]) + ' t: ' + str(tSet.shape[0]) + ' h: '+ str(hSet.shape[0]))
     print('Train Set: f :'+ str(fTrain_count) + ' t: '+ str(tTrain_count) + ' h: ' + str(hTrain_count))
     print('Tot: ' + str(fTrain_count+tTrain_count+hTrain_count) + ' labels: ' + str(labelsTrain.shape[0]) + ' train: ' + str(sentencesTrain.shape[0]))
     print('Test Set: f: ' + str(fTest_count) + ' t: ' + str(tTest_count) + ' h: ' + str(hTest_count))
@@ -103,6 +104,7 @@ def makeLabels(friends, tbbt, himym):
     df = pd.concat([pd.DataFrame(f), pd.DataFrame(t), pd.DataFrame(h)])
     return df
 
+
 def getAllpaths(scriptFile):
     #path = 'C:/Users/Dina/PycharmProjects/NLP_RP/transcripts/season2'
     filePaths = []
@@ -112,7 +114,7 @@ def getAllpaths(scriptFile):
                 filePaths.append(os.path.join(r, file))
     return filePaths
 
-
+main()
 
 
 
