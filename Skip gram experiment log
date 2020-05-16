@@ -28,4 +28,94 @@ tbbt: 704
 himym: 3408 *
 ---------------------------------------------------------------
 success rate: (11458 + 1988 + 3408) / (13059 + 14161 + 11665) =
-                                   16854/38921 = 0.4330310115361
+                                   16854/38885 = 0.43343191462
+
+
+adapt: Normalizing factor becomes N.factor/#words in show
+        (taking avg)
+
+13073 in Friends
+13059
+friends: 1000
+tbbt: 11490
+himym: 569
+
+15328 in TBBT
+14161
+friends: 153
+tbbt: 13566
+himym: 442
+
+12831 in HIMYM
+11665
+friends: 271
+tbbt: 9742
+himym: 1652
+
+
+
+
+adap: just tuning: f_prob * 0.999
+On TBBT
+
+4598
+4270
+friends: 2901
+tbbt: 981
+himym: 388
+
+f_prob * 0.8
+friends: 139
+tbbt: 1593
+himym: 2538
+
+adap: just tuning: f_prob * 0.999
+f_fix = 0.92
+t_fix = 1.08
+
+    on TBBT
+4598
+4270
+friends: 759
+tbbt: 2702 *
+himym: 809
+    on HIMYM
+3849
+3479
+friends: 804
+tbbt: 1109
+himym: 1566 *
+
+    on F
+3921
+3916
+friends: 2156 *
+tbbt: 1083
+himym: 677
+
+success rate = 2702+1566+2156/ 4270+3479+3916 = 6424/11665 = 55%
+----------------------------------
+
+f_fix = 0.9248
+t_fix = 1.0853
+
+13073
+13059
+friends: 6340*
+tbbt: 4243
+himym: 2476
+
+15328
+14161
+friends: 3071
+tbbt: 8176*
+himym: 2914
+
+12831
+11665
+friends: 2699
+tbbt: 3945
+himym: 5021*
+                              6340 + 8176 + 5021 / (13059+14161+11665) = 19537/38885 = 0.50243024
+                              NOFIX: (11458 + 1988 + 3408) / (13059 + 14161 + 11665) = 0.43343191462
+---------------------------------------------

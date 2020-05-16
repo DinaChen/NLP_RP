@@ -50,8 +50,13 @@ def main():
     #generateW2V(trainDataF, trainDataT, trainDataH)
     #friend = KeyedVectors.load_word2vec_format('w2v/friends.bin', binary=True, encoding= 'unicode_escape')
 
+    (t1, t2) = cutList(testDataT, 0.3)
+    (h1, h2) = cutList(testDataH, 0.3)
+    (f1, f2) = cutList(testDataF, 0.3)
 
-    resF = test(testDataH, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
+    #test(testDataF, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
+    #test(testDataT, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
+    test(testDataH, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
 
 
 def test(testData,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym):
@@ -78,11 +83,13 @@ def test(testData,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym):
 # calculate the likelihood of a given sentence in each serie.
 def classifier(sentence, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym):
 
+    f_fix = 0.9248
+    t_fix = 1.0853
     f_prob = probability(sentence, friends, f_Nfactor)
     t_prob = probability(sentence, tbbt, t_Nfactor)
     h_prob = probability(sentence, himym, h_Nfactor)
 
-    return [f_prob, t_prob, h_prob]
+    return [f_prob*f_fix, t_prob*t_fix, h_prob]
 
 
 
@@ -198,10 +205,13 @@ def getNormFactor(show):
     #print('has: ' + str(len(show.vocab)) + ' words')
 
     count = 0
-    sum = np.zeros(200, dtype="float32")  # remember to change it here
+    sum = np.zeros(200, dtype="float32")
+
     for word in show.vocab:
         count= count +1
         sum = sum + show.get_vector(word)
+
+   #return sum/count
     return sum
 
 
