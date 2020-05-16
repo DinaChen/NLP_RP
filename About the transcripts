@@ -1,19 +1,11 @@
-The Big Bang Theory
---------------------
-   #lines/#epi = avg.lines/epi
-S1  4213/17 247
-S2  5325/23 231
-S3  5335/23 231
-S4  5573/24 232
-S5  4912/24 204
-S6  4953/24 206
-S7  5429/24 226
-S8
-S9
-S10
-S11
-S12
 
-it takes 30s to generate sentence embedding for 1 episode
 
-"So, I can have the moving truck here by 8:00 am" , will become:  am
+Friends
+#lines: 65362
+#episodes: 231
+avg.lines per episode: 282.95238095238096
+
+words count
+f:18317
+t:29859
+h: 23711

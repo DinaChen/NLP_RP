@@ -6,7 +6,7 @@ noice = '(&.*;)|(Commercial Break)|(Commercial break)|' \
         '(Closing Credits)|(CLOSING CREDITS)|(Opening Credits)|' \
         '(OPENING TITLES)|(.push;)|(THE END)|[0-9](\.|:)*|\.\.(\.)*'
 
-def main():
+#def main():
 # <p><em>In the street</em></p>  0122
 # Todoaround 0305, problem with using int. ext. indicating location
 
@@ -27,46 +27,48 @@ def main():
 
 
 
- def himym():
-    path = 'How I Met Your Mother/season3'
+
+def himym():
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/How I Met Your Mother'
     filePaths = []
     for r, d, f in os.walk(path):
         for file in f:
             if '.html' in file:
                 filePaths.append(os.path.join(r, file))
-    himym = seasonTranscript(filePaths, 'other')
+    return seasonTranscript(filePaths, 'other')
     printLines(himym)
     print('#lines: ' + str(len(himym)))
     print('#episodes: ' + str(len(filePaths)))
     print('avg.lines per episode: ' + str(len(himym) / len(filePaths)))
 
 def bigbang():
-    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/season6'
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/The Big Bang Theory/'
     filePaths = []
     for r, d, f in os.walk(path):
         for file in f:
             if '.html' in file:
                 filePaths.append(os.path.join(r, file))
 
-    tbbt = seasonTranscript(filePaths, 'other')
+    return seasonTranscript(filePaths, 'other')
     printLines(tbbt)
     print('#lines: ' + str(len(tbbt)))
     print('#episodes: ' + str(len(filePaths)))
     print('avg.lines per episode: ' + str(len(tbbt) / len(filePaths)))
 
 def friends():
-    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/transcripts/season2'
+    path = 'C:/Users/Dina/PycharmProjects/NLP_RP/transcripts/'
     filePaths = []
     for r, d, f in os.walk(path):
         for file in f:
             if '.html' in file:
                 filePaths.append(os.path.join(r, file))
 
-    friends = seasonTranscript(filePaths, 'friends')
+    return seasonTranscript(filePaths, 'friends')
+
     printLines(friends)
     print('#lines: ' + str(len(friends)))
-    print('#episodes: ' + str(len(filePaths)))
-    print('avg.lines per episode: ' + str(len(friends) / len(filePaths)))
+    print('#episodes: ' + str(len(filePaths) + 4))
+    print('avg.lines per episode: ' + str(len(friends) / (len(filePaths) + 4)))
 
 # Given transcript of 1 season in html format, out put list of lines with all irrelevant info removed, all episodes concatenate together.
 # List(html_path) -> List(string)
@@ -183,4 +185,3 @@ def printLines(epi):
        print(line)
 
 
-main()

@@ -8,6 +8,7 @@ import pandas as pd
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import dataProcess
+import math
 
 
 # create a list of unparsed files                   for example:  ['The Big Bang Theory/season1/0105.html']

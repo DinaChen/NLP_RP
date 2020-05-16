@@ -1,0 +1,31 @@
+tbbt has: 29859 words
+friends has: 18317 words
+How I has: 23711 words
+
+
+Test F
+13073 lines from Friends
+13059 Valid lines (lines that doesn't return [0,0,0])
+
+friends: 11458  *
+tbbt: 431
+himym: 1170
+--------------------------------------------------------------
+Test T
+15328 lines from The Big Bang Theory
+14161 Valid lines (lines that doesn't return [0,0,0])
+
+friends: 10435
+tbbt: 1988      *
+himym: 1738
+---------------------------------------------------------------
+Test H
+12831 lines from How I Met Your Mother
+11665 Valid lines (lines that doesn't return [0,0,0])
+
+friends: 7553
+tbbt: 704
+himym: 3408 *
+---------------------------------------------------------------
+success rate: (11458 + 1988 + 3408) / (13059 + 14161 + 11665) =
+                                   16854/38921 = 0.4330310115361
