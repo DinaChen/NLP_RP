@@ -1,7 +1,7 @@
+First 80%
 tbbt has: 29859 words
 friends has: 18317 words
 How I has: 23711 words
-
 
 Test F
 13073 lines from Friends
@@ -118,4 +118,68 @@ tbbt: 3945
 himym: 5021*
                               6340 + 8176 + 5021 / (13059+14161+11665) = 19537/38885 = 0.50243024
                               NOFIX: (11458 + 1988 + 3408) / (13059 + 14161 + 11665) = 0.43343191462
+---------------------------------------------
+Result 1 : Trained on first 80%, tested on last 20%
+
+Friends has: 18317 words
+The Big Bang Theory has: 29859 words
+How I met Your Mother: 23711 words
+
+f_fix = 0.9214
+t_fix = 1.082
+h_fix = 0.9965
+
+13073
+13059
+friends: 6311*
+tbbt: 4283
+himym: 2465
+
+15328
+14161
+friends: 3044
+tbbt: 8217*
+himym: 2900
+
+12831
+11665
+friends: 2681
+tbbt: 3971
+himym: 5013*
+
+                    6311+8217+5013 = 19541 / 38885 = 0.50253311
+-----------------------------------------------------------------
+Result 2  : Tested on first 20%, trained on last 80%
+
+Friends has:                18379 words
+The Big Bang Theory has:    29746 words
+How I met Your Mother has:  22207 words
+
+f_balancer = 0.9279844167661946
+t_balancer = 1.0896035943809361
+h_balancer = 0.9824119888528693
+
+Total valid lines = 13052 + 13711 + 11666
+
+
+13072
+13052
+friends: 5034 *
+tbbt: 2515
+himym: 5503
+
+15327
+13711
+friends: 2337
+tbbt: 5787 *
+himym: 5587
+
+12830
+11666
+friends: 2137
+tbbt: 1845
+himym: 7684
+
+
+                            5034 + 5787 +7684 = 18505 / 38429 = 0.481537380624
 ---------------------------------------------

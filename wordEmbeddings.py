@@ -24,15 +24,64 @@ import numpy as np
 # why Python nltk introduced SnowballStemmers that are used to create non-English Stemmers!
 # First tokenize, then remove punctuation and stop words.
 # lemmatization before tokenization?
+# lancaster = LancasterStemmer()
+# porter = PorterStemmer()
 
-def main():
+#def main():
 
+
+
+def result2():
+
+    # Split train and test set
     friends_data = dataProcess.friends()
     tbbt_data = dataProcess.bigbang()
     himym_data = dataProcess.himym()
 
+    # Train word2Vec on the last 80% of data
+    (testDataF, trainDataF) = cutList(friends_data, 0.2)
+    (testDataT, trainDataT) = cutList(tbbt_data, 0.2)
+    (testDataH, trainDataH) = cutList(himym_data, 0.2)
 
-    # Get KeyedVectors of word2Vec embeddings, only tokenization and punctuation removal.
+    #generateW2V(trainDataF, trainDataT, trainDataH)        Only need to execute once
+    friends1 = KeyedVectors.load(get_tmpfile('friends_1.bin'), mmap='r')
+    tbbt1 = KeyedVectors.load(get_tmpfile('tbbt_1.bin'), mmap='r')
+    himym1 = KeyedVectors.load(get_tmpfile('himym_1.bin'), mmap='r')
+
+    #print('Friends has: ' + str(len(friends1.vocab)) + ' words')
+    #print('The Big Bang Theory has: ' + str(len(tbbt1.vocab)) + ' words')
+    #print('How I met Your Mother has: ' + str(len(himym1.vocab)) + ' words')
+
+    balancers = getBalancer(len(friends1.vocab), len(tbbt1.vocab), len(himym1.vocab))
+
+    t_Nfactor1 = getNormFactor(tbbt1)
+    f_Nfactor1 = getNormFactor(friends1)
+    h_Nfactor1 = getNormFactor(himym1)
+
+    #test(testDataF, f_Nfactor1, t_Nfactor1, h_Nfactor1, friends1, tbbt1, himym1)
+    #test(testDataT, f_Nfactor1, t_Nfactor1, h_Nfactor1, friends1, tbbt1, himym1)
+    #test(testDataH, f_Nfactor1, t_Nfactor1, h_Nfactor1, friends1, tbbt1, himym1, balancers)
+
+    # Result: (see Skip gram experiment log _ Result 2)
+    #         18505 / 38429 = 0.481537380624
+
+
+def result1():
+
+    # Split train and test set
+    friends_data = dataProcess.friends()
+    tbbt_data = dataProcess.bigbang()
+    himym_data = dataProcess.himym()
+
+    # Train word2Vec on the first 80% of data
+    (trainDataF, testDataF) = cutList(friends_data, 0.8)
+    (trainDataT, testDataT) = cutList(tbbt_data, 0.8)
+    (trainDataH, testDataH) = cutList(himym_data, 0.8)
+
+    # generateW2V(trainDataF, trainDataT, trainDataH)     Only need to execute once
+
+    # Get KeyedVectors of word2Vec embeddings
+    # Only punctuation removal.
     friends = KeyedVectors.load(get_tmpfile('friends.bin'), mmap='r')
     tbbt = KeyedVectors.load(get_tmpfile('tbbt.bin'), mmap='r')
     himym = KeyedVectors.load(get_tmpfile('himym.bin'), mmap='r')
@@ -42,29 +91,23 @@ def main():
     f_Nfactor = getNormFactor(friends)
     h_Nfactor = getNormFactor(himym)
 
-    (trainDataF, testDataF) = cutList(friends_data, 0.8)
-    (trainDataT, testDataT) = cutList(tbbt_data, 0.8)
-    (trainDataH, testDataH) = cutList(himym_data, 0.8)
-    #lancaster = LancasterStemmer()
-    #porter = PorterStemmer()
-    #generateW2V(trainDataF, trainDataT, trainDataH)
-    #friend = KeyedVectors.load_word2vec_format('w2v/friends.bin', binary=True, encoding= 'unicode_escape')
+    balancers = getBalancer(len(friends.vocab), len(tbbt.vocab), len(himym.vocab))
 
-    (t1, t2) = cutList(testDataT, 0.3)
-    (h1, h2) = cutList(testDataH, 0.3)
-    (f1, f2) = cutList(testDataF, 0.3)
+    #test(testDataF, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
+    #test(testDataT, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
+    test(testDataH, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
 
-    #test(testDataF, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
-    #test(testDataT, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
-    test(testDataH, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
+    # Result: (see Skip gram experiment log _ Result 1)
+    #         19541 / 38885 = 0.50253311
 
 
-def test(testData,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym):
+
+def test(testData,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers):
 
     result = []
     for sentence in testData:
         print(sentence)
-        report = classifier(sentence,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym)
+        report = classifier(sentence,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
 
         if report.count(0.0) != 3:                  # if it's not [0,0,0]
             print(report)
@@ -81,15 +124,17 @@ def test(testData,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym):
 
 
 # calculate the likelihood of a given sentence in each serie.
-def classifier(sentence, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym):
+def classifier(sentence, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers):
 
-    f_fix = 0.9248
-    t_fix = 1.0853
+    f_balancer = balancers[0]
+    t_balancer = balancers[1]
+    h_balancer = balancers[2]
+
     f_prob = probability(sentence, friends, f_Nfactor)
     t_prob = probability(sentence, tbbt, t_Nfactor)
     h_prob = probability(sentence, himym, h_Nfactor)
 
-    return [f_prob*f_fix, t_prob*t_fix, h_prob]
+    return [f_prob*f_balancer, t_prob*t_balancer, h_prob*h_balancer]
 
 
 
@@ -155,9 +200,9 @@ def probability(sentence, show, nFactor):
 # pay attention: keyedvectors should be generated from the correct temp file
 def generateW2V(trainDataF, trainDataT, trainDataH):
 
-    friendW2V = generate(trainDataF, 'friends.bin')
-    tbbtW2V = generate(trainDataT, 'tbbt.bin')
-    himymW2V = generate(trainDataH, 'himym.bin')
+    friendW2V = generate(trainDataF, 'friends_1.bin')
+    tbbtW2V = generate(trainDataT, 'tbbt_1.bin')
+    himymW2V = generate(trainDataH, 'himym_1.bin')
 
 
 def generate(sentences, tmp_File):
@@ -202,12 +247,13 @@ def cutList(list, ratio):
 # vectors of all words in vocabulary, add together as normalization- factor
 def getNormFactor(show):
 
-    #print('has: ' + str(len(show.vocab)) + ' words')
+    print('has: ' + str(len(show.vocab)) + ' words')
 
     count = 0
     sum = np.zeros(200, dtype="float32")
 
     for word in show.vocab:
+        print(word)
         count= count +1
         sum = sum + show.get_vector(word)
 
@@ -215,8 +261,21 @@ def getNormFactor(show):
     return sum
 
 
+def getBalancer(f, t, h):
+    tot = f + t + h
+    f_rate = f / tot
+    t_rate = t / tot
+    h_rate = h / tot
 
+    fbalancer = 1 + (f_rate - 1/3)
+    tbalancer = 1 + (t_rate - 1/3)
+    hbalancer = 1 + (h_rate - 1/3)
 
+    print(fbalancer)
+    print(tbalancer)
+    print(hbalancer)
+
+    return [fbalancer, tbalancer, hbalancer]
 
 
 # just trying out
@@ -241,6 +300,7 @@ def spacy():
             print(st)
 
 
-main()
+result2()
+#main()
 #tokenize()
 #spacy()
