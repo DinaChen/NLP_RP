@@ -27,9 +27,13 @@ import numpy as np
 # lancaster = LancasterStemmer()
 # porter = PorterStemmer()
 
+
 def main():
 
-    # Split train and test set
+    # words embedding of Friends, fold 1 : 'friends1.bin'
+    # words embedding of Friends, fold 1 with stop words removal: 'friends1_sr.bin'
+
+    # Split the transcript data into 5 equal parts
     friends_data = dataProcess.friends()
     tbbt_data = dataProcess.bigbang()
     himym_data = dataProcess.himym()
@@ -47,8 +51,8 @@ def main():
     tbbt_train1 = np.concatenate([tbbt_Sets[1], tbbt_Sets[2], tbbt_Sets[3], tbbt_Sets[4]])
     himym_train1 = np.concatenate([himym_Sets[1], himym_Sets[2], himym_Sets[3], himym_Sets[4]])
 
-    #generateW2V(friends_train1, tbbt_train1, himym_train1, 'friends1.bin', 'tbbt1.bin', 'himym1.bin')
-    #runTest('friends1.bin','tbbt1.bin','himym1.bin', friends_test1, tbbt_test1, himym_test1)
+    #generateW2V(friends_train1, tbbt_train1, himym_train1, 'friends1_sr.bin', 'tbbt1_sr.bin', 'himym1_sr.bin')
+    runTest('friends1_sr.bin','tbbt1_sr.bin','himym1_sr.bin', friends_test1, tbbt_test1, himym_test1)
 
     # Fold 2
     friends_test2 = friends_Sets[1]
@@ -58,8 +62,8 @@ def main():
     tbbt_train2 = np.concatenate([tbbt_Sets[0], tbbt_Sets[2], tbbt_Sets[3], tbbt_Sets[4]])
     himym_train2 = np.concatenate([himym_Sets[0], himym_Sets[2], himym_Sets[3], himym_Sets[4]])
 
-    #generateW2V(friends_train2, tbbt_train2, himym_train2, 'friends2.bin', 'tbbt2.bin', 'himym2.bin')
-    #runTest('friends2.bin', 'tbbt2.bin', 'himym2.bin', friends_test2, tbbt_test2, himym_test2)
+    #generateW2V(friends_train2, tbbt_train2, himym_train2, 'friends2_sr.bin', 'tbbt2_sr.bin', 'himym2_sr.bin')
+    #runTest('friends2_sr.bin', 'tbbt2_sr.bin', 'himym2_sr.bin', friends_test2, tbbt_test2, himym_test2)
 
     # Fold 3
     friends_test3 = friends_Sets[2]
@@ -68,8 +72,8 @@ def main():
     friends_train3 = np.concatenate([friends_Sets[0],friends_Sets[1], friends_Sets[3], friends_Sets[4]])
     tbbt_train3 = np.concatenate([tbbt_Sets[0], tbbt_Sets[1], tbbt_Sets[3], tbbt_Sets[4]])
     himym_train3 = np.concatenate([himym_Sets[0], himym_Sets[1], himym_Sets[3], himym_Sets[4]])
-    #generateW2V(friends_train3, tbbt_train3, himym_train3, 'friends3.bin', 'tbbt3.bin', 'himym3.bin')
-    #runTest('friends3.bin', 'tbbt3.bin', 'himym3.bin', friends_test3, tbbt_test3, himym_test3)
+    #generateW2V(friends_train3, tbbt_train3, himym_train3, 'friends3_sr.bin', 'tbbt3_sr.bin', 'himym3_sr.bin')
+    #runTest('friends3_sr.bin', 'tbbt3_sr.bin', 'himym3_sr.bin', friends_test3, tbbt_test3, himym_test3)
 
     # Fold 4
     friends_test4 = friends_Sets[3]
@@ -78,8 +82,8 @@ def main():
     friends_train4 = np.concatenate([friends_Sets[0],friends_Sets[1], friends_Sets[2], friends_Sets[4]])
     tbbt_train4 = np.concatenate([tbbt_Sets[0], tbbt_Sets[1], tbbt_Sets[2], tbbt_Sets[4]])
     himym_train4 = np.concatenate([himym_Sets[0], himym_Sets[1], himym_Sets[2], himym_Sets[4]])
-    #generateW2V(friends_train4, tbbt_train4, himym_train4, 'friends4.bin', 'tbbt4.bin', 'himym4.bin')
-    runTest('friends4.bin', 'tbbt4.bin', 'himym4.bin', friends_test4, tbbt_test4, himym_test4)
+    #generateW2V(friends_train4, tbbt_train4, himym_train4, 'friends4_sr.bin', 'tbbt4_sr.bin', 'himym4_sr.bin')
+    #runTest('friends4_sr.bin', 'tbbt4_sr.bin', 'himym4_sr.bin', friends_test4, tbbt_test4, himym_test4)
 
     # Fold 5
     friends_test5 = friends_Sets[4]
@@ -88,8 +92,8 @@ def main():
     friends_train5 = np.concatenate([friends_Sets[0],friends_Sets[1], friends_Sets[2], friends_Sets[3]])
     tbbt_train5 = np.concatenate([tbbt_Sets[0], tbbt_Sets[1], tbbt_Sets[2], tbbt_Sets[3]])
     himym_train5 = np.concatenate([himym_Sets[0], himym_Sets[1], himym_Sets[2], himym_Sets[3]])
-    #generateW2V(friends_train5, tbbt_train5, himym_train5, 'friends5.bin', 'tbbt5.bin', 'himym5.bin')
-    runTest('friends5.bin', 'tbbt5.bin', 'himym5.bin', friends_test5, tbbt_test5, himym_test5)
+    #generateW2V(friends_train5, tbbt_train5, himym_train5, 'friends5_sr.bin', 'tbbt5_sr.bin', 'himym5_sr.bin')
+    #runTest('friends5_sr.bin', 'tbbt5_sr.bin', 'himym5_sr.bin', friends_test5, tbbt_test5, himym_test5)
 
 
 def runTest(fpath, tpath, hpath, ftest, ttest, htest):
@@ -100,15 +104,15 @@ def runTest(fpath, tpath, hpath, ftest, ttest, htest):
 
     balancers = getBalancer(len(friends.vocab), len(tbbt.vocab), len(himym.vocab))
 
-    t_Nfactor = getNormFactor(tbbt)
     f_Nfactor = getNormFactor(friends)
+    t_Nfactor = getNormFactor(tbbt)
     h_Nfactor = getNormFactor(himym)
 
-    test(ftest, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
+    #test(ftest, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
     #test(ttest, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
     #test(htest, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers)
 
-
+# ignore this
 def result2():
 
     # Split train and test set
@@ -132,9 +136,11 @@ def result2():
 
     balancers = getBalancer(len(friends1.vocab), len(tbbt1.vocab), len(himym1.vocab))
 
-    t_Nfactor1 = getNormFactor(tbbt1)
     f_Nfactor1 = getNormFactor(friends1)
+    t_Nfactor1 = getNormFactor(tbbt1)
     h_Nfactor1 = getNormFactor(himym1)
+
+    print(balancers)
 
     #test(testDataF, f_Nfactor1, t_Nfactor1, h_Nfactor1, friends1, tbbt1, himym1, balancers)
     #test(testDataT, f_Nfactor1, t_Nfactor1, h_Nfactor1, friends1, tbbt1, himym1, balancers)
@@ -201,7 +207,7 @@ def test(testData,f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balance
     return result
 
 
-# calculate the likelihood of a given sentence in each serie.
+# calculate the likelihood of a given sentence in each show.
 def classifier(sentence, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, balancers):
 
     f_balancer = balancers[0]
@@ -215,7 +221,7 @@ def classifier(sentence, f_Nfactor, t_Nfactor, h_Nfactor, friends, tbbt, himym, 
     return [f_prob*f_balancer, t_prob*t_balancer, h_prob*h_balancer]
 
 
-
+# calculate the probability of the given sentence in the given show.
 def probability(sentence, show, nFactor):
 
     # tokenize the words and filter out the words that are not in vocabulary (show)
@@ -274,26 +280,26 @@ def probability(sentence, show, nFactor):
     #print('result: ' + str(probability))
     return probability/t
 
-# generate word2Vec model on the data sets, save to temp file.
-# pay attention to how to arrange the temp file.
+# generate word2Vec model on the data sets, save to a temp file.
 # pay attention: keyedvectors should be generated from the correct temp file
 def generateW2V(trainDataF, trainDataT, trainDataH, fpath, tpath, hpath):
 
     friendW2V = generate(trainDataF, fpath)
-    tbbtW2V = generate(trainDataT, tpath) #'tbbt_1.bin
+    tbbtW2V = generate(trainDataT, tpath)
     himymW2V = generate(trainDataH, hpath)
 
-
+# generate the words embedding for the given vocabulary (input: sentences)
+# Attention: manually adapt if removing stop words.
 def generate(sentences, tmp_File):
 
     phr = Phrases()
-    # only first 80% for the sentence
+
     bags = []
     for sentence in sentences:
         wordBag = nltk.word_tokenize(sentence)  #cut sentence in words
         wordBag_puncFree = []
         for word in wordBag:
-            if word not in string.punctuation : #and word not in stopwords.words("english"):
+            if word not in string.punctuation and word not in stopwords.words("english"):           # stop words removal
                 # wordBag_puncFree.append(porter.stem(word))   # stem?
                 wordBag_puncFree.append(word)
                 phr.add_vocab([wordBag_puncFree])
@@ -332,7 +338,7 @@ def getNormFactor(show):
     sum = np.zeros(200, dtype="float32")
 
     for word in show.vocab:
-        print(word)
+        #print(word)
         count= count +1
         sum = sum + show.get_vector(word)
 
