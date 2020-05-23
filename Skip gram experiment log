@@ -119,15 +119,15 @@ himym: 5021*
                               6340 + 8176 + 5021 / (13059+14161+11665) = 19537/38885 = 0.50243024
                               NOFIX: (11458 + 1988 + 3408) / (13059 + 14161 + 11665) = 0.43343191462
 ---------------------------------------------
-Result 1 : Trained on first 80%, tested on last 20%
+Result 5 : Trained on first 80%, tested on last 20%
 
 Friends has: 18317 words
 The Big Bang Theory has: 29859 words
 How I met Your Mother: 23711 words
 
-f_fix = 0.9214
-t_fix = 1.082
-h_fix = 0.9965
+f_balancer = 0.9214
+t_balancer = 1.082
+h_balancer = 0.9965
 
 13073
 13059
@@ -149,7 +149,7 @@ himym: 5013*
 
                     6311+8217+5013 = 19541 / 38885 = 0.50253311
 -----------------------------------------------------------------
-Result 2  : Tested on first 20%, trained on last 80%
+Result 1  : Tested on first 20%, trained on last 80%
 
 Friends has:                18379 words
 The Big Bang Theory has:    29746 words
@@ -183,3 +183,187 @@ himym: 7684
 
                             5034 + 5787 +7684 = 18505 / 38429 = 0.481537380624
 ---------------------------------------------
+RESULT1 : FOLD 1
+13073
+13053
+friends: 4713*
+tbbt: 3034
+himym: 5306
+
+15328
+13712
+friends: 2058
+tbbt: 6430*
+himym: 5224
+
+12831
+11667
+friends: 1919
+tbbt: 2308
+himym: 7440*
+
+13053+13712+11667 = 38432
+4713+6430+7440 = 18583
+Rate = 48.352935%  (himym dominates)
+--------------------------------------------
+RESULT2 : FOLD 2
+
+13073
+13065
+friends: 6795*
+tbbt: 2349
+himym: 3921
+
+15328
+13344
+friends: 3717
+tbbt: 4395*
+himym: 5232
+
+12831
+11600
+friends: 2308
+tbbt: 1688
+himym: 7604*
+
+13065+13344+11600= 38009
+6795+4395+7604 = 18794
+Rate = 49.446% (himym dominates)
+---------------------------------------------
+RESULT3 : FOLD 3
+
+13072
+13054
+friends: 7909*
+tbbt: 1835
+himym: 3310
+
+15328
+13959
+friends: 2292
+tbbt: 8928*
+himym: 2739
+
+12830
+11722
+friends: 2902
+tbbt: 1584
+himym: 7236*
+
+13054+13959+11722= 38735
+7909+8928+7236= 24073
+Rate = 62.147928%
+---------------------------------------------
+RESULT4 : FOLD 4
+
+13072
+13064
+friends: 8957 *
+tbbt: 2180
+himym: 1927
+
+15328
+14078
+friends: 2768
+tbbt: 10028*
+himym: 1282
+
+12830
+11714
+friends: 4187
+tbbt: 2649
+himym: 4878*
+
+13064+14078+11714= 38856
+8957+10028+4878 = 23863
+Rate = 61.41393%
+
+-------------------------------------------
+RESULT5 : FOLD 5
+13072
+13058
+friends: 6552*
+tbbt: 4423
+himym: 2083
+
+15327
+14160
+friends: 3204
+tbbt: 8327*
+himym: 2629
+
+12830
+11664
+friends: 2974
+tbbt: 4012
+himym: 4678*
+
+13058+14160+11664 = 38882
+6552+8327+4678 = 19557
+Rate = 50.2983%
+-----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2020.5.18
+adaptation: avg over the context words!
+avg is not a good idea
+---------------------------------------------
+Result 1.2  Trained on first 80%, tested on last 20%
+with balancers and avg
+
+13073
+13059
+friends: 4447*
+tbbt: 5340
+himym: 3272
+
+15328
+14161
+friends: 3844
+tbbt: 6998*
+himym: 3319
+
+12831
+11665
+friends: 3100
+tbbt: 4148
+himym: 4417*
+                                    15862/38885 = 0.4079207921
+---------------------------------------------------
+Result 2.2  Trained on last 80%, tested on first 20%
+with balancers and avg
+13072
+13052
+friends: 3987*
+tbbt: 2895
+himym: 6170
+
+15327
+13711
+friends: 2988
+tbbt: 4743*
+himym: 5980
+
+12830
+11666
+friends: 2467
+tbbt: 2234
+himym: 6965*
+
